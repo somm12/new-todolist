@@ -3,13 +3,17 @@ const input = form.querySelector("input");
 const TODOS = "todo";
 let toDos = [];
 
+function saveToDo() {
+  localStorage.setItem(TODOS, JSON.stringify(toDos));
+}
+
 function deleteToDo(event) {
   console.log("d");
   const btn = event.target;
   const li = btn.parentNode.parentNode;
   li.remove();
   toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id));
-  localStorage.setItem(TODOS, JSON.stringify(toDos));
+  saveToDo();
 }
 function completeToDo(event) {
   const btn = event.target;
@@ -25,7 +29,7 @@ function updateToDo(text, id) {
     }
   });
   console.log(toDos);
-  localStorage.setItem(TODOS, JSON.stringify(toDos));
+  saveToDo();
 
   //localStroage update
 }
@@ -38,23 +42,22 @@ function dbToDo(event) {
   const editingInput = todoText.parentNode.nextSibling;
   editingInput.value = todoText.innerText;
   editingInput.classList.toggle("editing");
-  todoBox.classList.toggle("todo-each-box");
+  todoBox.classList.toggle("todo-each-box-editing");
   editingInput.focus();
 
-  document.addEventListener(
-    "click",
-    () => {
+  document.addEventListener("click", () => {
+    //현재 수정 중인 경우에만 외부 영역 클릭시 다시 돌아오는 기능.
+    if (todoBox.className === "todo-each-box-editing") {
       editingInput.classList.toggle("editing");
-      todoBox.classList.toggle("todo-each-box");
-    },
-    { once: true }
-  );
+      todoBox.classList.toggle("todo-each-box-editing");
+    }
+  });
   editingInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       todoText.innerText = e.target.value;
       updateToDo(e.target.value, parseInt(listToEdit.id));
       editingInput.classList.toggle("editing");
-      todoBox.classList.toggle("todo-each-box");
+      todoBox.classList.toggle("todo-each-box-editing");
     }
   });
 }
@@ -94,7 +97,7 @@ function paintingToDos(text) {
     text: text,
   };
   toDos.push(newToDo);
-  localStorage.setItem(TODOS, JSON.stringify(toDos));
+  saveToDo();
 }
 
 function handleSubmit(e) {
