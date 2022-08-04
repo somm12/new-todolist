@@ -72,6 +72,7 @@ function paintingToDos(text) {
 
   //화면상에 나타낼 부분
   const todoCompleteBtn = document.createElement("button");
+  todoCompleteBtn.classList.add("complete-btn");
   todoCompleteBtn.innerText = "✅";
   const todoEachText = document.createElement("h3");
   todoEachText.classList.add("todo-text");
@@ -79,8 +80,9 @@ function paintingToDos(text) {
 
   const todoEditInput = document.createElement("input");
   todoEditInput.classList.add("editing", "editing-box");
-  const todoDeleteBtn = document.createElement("button");
-  todoDeleteBtn.innerText = "❌";
+  const todoDeleteBtn = document.createElement("i");
+  todoDeleteBtn.classList.add("fa-solid", "fa-xmark", "delete-btn-hide");
+  //   todoDeleteBtn.innerText = "❌";
   //화면상에 나타낼 부분
   todoEachContent.append(...[todoCompleteBtn, todoEachText, todoDeleteBtn]);
 
@@ -90,6 +92,14 @@ function paintingToDos(text) {
   todoDeleteBtn.addEventListener("click", deleteToDo);
   todoCompleteBtn.addEventListener("click", completeToDo);
   todoEachText.ondblclick = dbToDo;
+
+  //todo리스트 각 리스트에 마우스 오버시, 삭제 버튼 보임
+  todoListEach.addEventListener("mouseover", () =>
+    todoDeleteBtn.classList.toggle("delete-btn-hide")
+  );
+  todoListEach.addEventListener("mouseout", () =>
+    todoDeleteBtn.classList.toggle("delete-btn-hide")
+  );
 
   const newId = toDos.length + 1;
   const newToDo = {

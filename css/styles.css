@@ -64,7 +64,7 @@ li div {
 
 .todo-text {
   width: 100%;
-  margin: 0px 5px;
+  margin: 0px 10px;
   color: white;
   font-weight: 500;
   font-size: 30px;
@@ -82,5 +82,26 @@ li div {
   width: 100%;
 }
 .todo-each-box-editing {
+  display: none;
+}
+.complete-btn {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 100%;
+  vertical-align: baseline;
+  font-family: inherit;
+  font-weight: inherit;
+  color: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-font-smoothing: antialiased;
+}
+.fa-xmark {
+  font-size: 30px;
+  color: rgb(185, 24, 24);
+}
+.delete-btn-hide {
   display: none;
 }
