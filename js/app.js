@@ -71,11 +71,13 @@ function paintingToDos(text) {
   const todoEachContent = document.createElement("div");
 
   //화면상에 나타낼 부분
-  const todoCompleteBtn = document.createElement("button");
+  const todoCompleteBtn = document.createElement("input");
+  todoCompleteBtn.type = "checkbox";
   todoCompleteBtn.classList.add("complete-btn");
-  todoCompleteBtn.innerText = "✅";
-  const todoEachText = document.createElement("h3");
+
+  const todoEachText = document.createElement("label");
   todoEachText.classList.add("todo-text");
+  todoEachText.htmlFor = "check";
   todoEachText.innerText = text;
 
   const todoEditInput = document.createElement("input");

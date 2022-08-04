@@ -64,7 +64,7 @@ li div {
 
 .todo-text {
   width: 100%;
-  margin: 0px 10px;
+  padding: 10px;
   color: white;
   font-weight: 500;
   font-size: 30px;
@@ -72,8 +72,7 @@ li div {
 }
 .complete-todo {
   text-decoration: line-through;
-  color: rgb(172, 169, 169);
-  font-style: italic;
+  color: rgb(199, 193, 193);
 }
 .editing {
   display: none;
@@ -85,23 +84,44 @@ li div {
   display: none;
 }
 .complete-btn {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  font-size: 100%;
-  vertical-align: baseline;
-  font-family: inherit;
-  font-weight: inherit;
-  color: inherit;
-  -webkit-appearance: none;
-  appearance: none;
-  -webkit-font-smoothing: antialiased;
+  zoom: 1.5;
 }
+/*check box css*/
+input[type="checkbox"] {
+  margin: 0px;
+  padding: 0px;
+  appearance: none;
+  -webkit-appearance: none;
+  height: 20px;
+  width: 24px;
+  background-color: #d5d5d5;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+input[type="checkbox"]:after {
+  content: "\f00c";
+  font: var(--fa-font-solid);
+  font-size: "30px";
+  color: white;
+  display: none;
+}
+input[type="checkbox"]:hover {
+  background-color: #a5a5a5;
+}
+input[type="checkbox"]:checked {
+  background-color: #5bcd3e;
+}
+input[type="checkbox"]:checked::after {
+  display: block;
+}
+/*check box css*/
 .fa-xmark {
   font-size: 30px;
   color: rgb(185, 24, 24);
 }
 .delete-btn-hide {
-  display: none;
+  visibility: hidden;
 }
