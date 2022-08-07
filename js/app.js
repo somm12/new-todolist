@@ -18,7 +18,15 @@ function deleteToDo(event) {
 function completeToDo(event) {
   const btn = event.target;
   const text = btn.nextSibling;
+  const listToChecked = text.parentNode.parentNode;
   text.classList.toggle("complete-todo");
+  toDos.map((li) => {
+    if (li.id === parseInt(listToChecked.id)) {
+      li.complete = li.complete === true ? false : true;
+      console.log(li);
+    }
+  });
+  saveToDo();
 }
 function updateToDo(text, id) {
   //front side update
@@ -62,7 +70,7 @@ function dbToDo(event) {
   });
 }
 
-function paintingToDos(text) {
+function paintingToDos(text, complete) {
   const todoBox = document.querySelector(".todo-list");
   const todoList = todoBox.querySelector("ul");
 
@@ -79,6 +87,11 @@ function paintingToDos(text) {
   todoEachText.classList.add("todo-text");
   todoEachText.htmlFor = "check";
   todoEachText.innerText = text;
+  if (complete === true) {
+    console.log("wjatajst");
+    todoEachText.classList.toggle("complete-todo");
+    todoCompleteBtn.checked = true;
+  }
 
   const todoEditInput = document.createElement("input");
   todoEditInput.classList.add("editing", "editing-box");
@@ -107,6 +120,7 @@ function paintingToDos(text) {
   const newToDo = {
     id: newId,
     text: text,
+    complete: complete,
   };
   toDos.push(newToDo);
   saveToDo();
@@ -114,7 +128,7 @@ function paintingToDos(text) {
 
 function handleSubmit(e) {
   e.preventDefault();
-  paintingToDos(input.value);
+  paintingToDos(input.value, false);
   input.value = "";
 }
 
@@ -123,7 +137,7 @@ function init() {
   form.addEventListener("submit", handleSubmit);
   if (loadedToDos !== null) {
     const parsedToDos = JSON.parse(loadedToDos);
-    parsedToDos.map((li) => paintingToDos(li.text));
+    parsedToDos.map((li) => paintingToDos(li.text, li.complete));
   }
 }
 
