@@ -1,7 +1,7 @@
 body {
   width: 100%;
   overflow: hidden;
-  background-color: black;
+  background: linear-gradient(black, black, #23074d, #d9694b);
 }
 .img-box {
   position: relative;
