@@ -64,8 +64,10 @@ function dbToDo(event) {
     if (e.key === "Enter") {
       todoText.innerText = e.target.value;
       updateToDo(e.target.value, parseInt(listToEdit.id));
-      editingInput.classList.toggle("editing");
-      todoBox.classList.toggle("todo-each-box-editing");
+      if (todoBox.className === "todo-each-box-editing") {
+        editingInput.classList.toggle("editing");
+        todoBox.classList.toggle("todo-each-box-editing");
+      }
     }
   });
 }
